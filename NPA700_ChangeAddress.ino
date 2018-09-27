@@ -220,3 +220,39 @@ void loop() {
       Serial.println("done\n");
 
   }
+
+
+
+  void printAddressTo(int address, Stream *stream)
+  {
+    if (stream == NULL)
+    {
+      return;
+    }
+
+    stream -> print(address, DEC);
+    stream -> print(" (decimal) or ");
+    printByteInHexTo(address, stream, true);
+    stream -> println(" (hexadecimal)");
+  }
+
+
+void printByteInHexTo(int b, Stream *stream, bool prepend0x)
+  {
+    if (stream == NULL)
+    {
+      return;
+    }
+
+    if (prepend0x)
+    {
+      stream -> print("0x");
+    }
+
+    if (b <= 0xF)
+    {
+      stream -> print("0");
+    }
+
+    stream -> print(b, HEX);
+  }
